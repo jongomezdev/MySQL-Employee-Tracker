@@ -70,8 +70,9 @@ function init() {
       }
     });
 }
-
-// View departments
+// ***************
+// View functions
+// ***************
 function viewDep() {
   connection.query("SELECT * FROM department", (err, data) => {
     if (err) throw err;
@@ -79,6 +80,32 @@ function viewDep() {
     init();
   });
 }
+
+function viewRoles() {
+  connection.query("SELECT * FROM role", (err, data) => {
+    if (err) throw err;
+    console.table(data);
+    init();
+  });
+}
+function viewEmp() {
+  connection.query("SELECT * FROM employee", (err, data) => {
+    if (err) throw err;
+    console.table(data);
+    init();
+  });
+}
+
+// ***************
+// Add functions
+// ***************
+function addDep() {}
+
+function addRole() {}
+
+function addEmp() {}
+
+function update() {}
 
 // Add departments, roles, employees
 
