@@ -5,27 +5,27 @@ const figlet = require("figlet");
 const colors = require("colors");
 
 // Opening Graphic
-figlet("Employee Tracker", function (err, data) {
-  if (err) {
-    console.log("Something went wrong...");
-    console.dir(err);
-  }
+figlet("Employee Tracker", (err, data) => {
+  if (err) throw err;
   console.log(data.rainbow);
 });
 
 // Establish connection with database
 const connection = mysql.createConnection({
   host: "localhost",
-
   port: 3306,
-
   user: "root",
-
   password: "~HG)9Pdw9Y4ZgnPW",
   database: "employee_tracker",
 });
 
-async function searchDB() {
+connection.connect((err) => {
+  if (err) throw err;
+  console.log("Connected");
+  init();
+});
+
+function init() {
   inquirer
     .prompt({
       name: "choice",
@@ -69,6 +69,15 @@ async function searchDB() {
           connection.end();
       }
     });
+}
+
+// View departments
+function viewDep() {
+  connection.query("SELECT * FROM department", (err, data) => {
+    if (err) throw err;
+    console.table(data);
+    init();
+  });
 }
 
 // Add departments, roles, employees
