@@ -11,3 +11,14 @@ figlet("Employee Tracker", function (err, data) {
   }
   console.log(data.rainbow);
 });
+
+const connection = mysql.createConnection({
+  host: "localhost",
+
+  port: 3306,
+
+  user: "root",
+
+  password: "~HG)9Pdw9Y4ZgnPW",
+  database: "top_songsDB",
+});
