@@ -14,39 +14,13 @@ VALUES ('Doctor', 300000.00, 1),
 ('Frontend Developer', 60000.00, 3);
 
 
--- office manager
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ('Jayden', 'Seward', 2, 1),
+('Lacy', 'Morris', 4, 3),
+('Chad', 'Forest', 6, 5);
 
--- receptionist 
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ('Nikolas', 'Abbott', 1),
+('Braiden', 'Emmet', 3),
+('Mackenzie', 'Pit', 5);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- private practice
--- doctor
--- nurse
--- pa
--- rn
-
--- medical assitant
--- medical scribe
-
--- receptionist
--- billers
--- bookeepers
-
--- marketing
