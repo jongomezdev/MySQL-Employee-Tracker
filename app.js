@@ -5,10 +5,10 @@ const figlet = require("figlet");
 const colors = require("colors");
 
 // Opening Graphic
-figlet("Employee Tracker", (err, data) => {
-  if (err) throw err;
-  console.log(data.rainbow);
-});
+// figlet("Employee Tracker", (err, data) => {
+//   if (err) throw err;
+//   console.log(data.rainbow);
+// });
 
 // Establish connection with database
 const connection = mysql.createConnection({
@@ -21,7 +21,7 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) throw err;
-  console.log("Connected");
+  console.log("Connected".green);
   init();
 });
 
@@ -30,7 +30,7 @@ function init() {
     .prompt({
       name: "choice",
       type: "list",
-      message: "Welcome, please select an action:",
+      message: "Please select an action:",
       choices: [
         "View all departments",
         "View all roles",

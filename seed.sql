@@ -16,11 +16,9 @@ VALUES ('Doctor', 300000.00, 1),
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ('Jayden', 'Seward', 2, 1),
+('Nikolas', 'Abbott', 1, NULL),
 ('Lacy', 'Morris', 4, 3),
-('Chad', 'Forest', 6, 5);
-
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ('Nikolas', 'Abbott', 1),
-('Braiden', 'Emmet', 3),
-('Mackenzie', 'Pit', 5);
+('Braiden', 'Emmet', 3, NULL),
+('Chad', 'Forest', 6, 5),
+('Mackenzie', 'Pit', 5, NULL);
 
