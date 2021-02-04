@@ -99,7 +99,30 @@ function viewEmp() {
 // ***************
 // Add functions
 // ***************
-function addDep() {}
+function addDep() {
+  inquirer
+    .prompt([
+      {
+        name: "department",
+        type: "input",
+        message: "What would you like to name this department?",
+      },
+    ])
+    .then((answer) => {
+      const query = "INSERT INTO department SET ? ";
+      connection.query(
+        query,
+        {
+          name: answer.department,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log(`${answer.department} has been added`.green);
+          init();
+        }
+      );
+    });
+}
 
 function addRole() {}
 
