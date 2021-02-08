@@ -254,6 +254,7 @@ function addEmp() {
             if (err) throw err;
             console.log(
               `${answer.firstName} ${answer.lastName} has been added as a ${answer.role}`
+                .yellow
             );
             init();
           }
@@ -262,7 +263,56 @@ function addEmp() {
   });
 }
 
-function update() {}
+function update() {
+  connection.query("SELECT * FROM employee, role ", (err, res) => {
+    if (err) throw err;
+
+    inquirer
+      .prompt([
+        {
+          name: "employee",
+          type: "list",
+          choices: () => {
+            let roles = [];
+            for (let i = 0; i < res.length; i++) {
+              roles.push(res[i].title);
+            }
+          },
+          message: "What new role would you like to assign?",
+        },
+      ])
+      .then((answer) => {
+        let updEmp;
+        let updRole;
+
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].last_name === answer.employee) {
+            updEmp = res[i];
+          }
+        }
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].title === answer.role) {
+            updRole = res[i];
+          }
+        }
+        connection.query(
+          "UPDATE employee SET ? WHERE ? "[
+            ({
+              role_id: updRole,
+            },
+            {
+              last_name: updEmp,
+            })
+          ],
+          (err) => {
+            if (err) throw err;
+            console.log("Role was updated!".green);
+            init();
+          }
+        );
+      });
+  });
+}
 
 // Add departments, roles, employees
 
