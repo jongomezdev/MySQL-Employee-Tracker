@@ -1,15 +1,8 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
-const figlet = require("figlet");
 const colors = require("colors");
 const { restoreDefaultPrompts } = require("inquirer");
-
-// Opening Graphic
-// figlet("Employee \n \n Tracker", (err, data) => {
-//   if (err) throw err;
-//   console.log(data.rainbow);
-// });
 
 // Establish connection with database
 const connection = mysql.createConnection({
@@ -22,7 +15,7 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) throw err;
-  console.log("Connected".green);
+  console.log("CONNECTED".green);
   init();
 });
 
@@ -40,7 +33,7 @@ function init() {
         "Add a role",
         "Add an employee",
         "Update employee roles",
-        "Exit",
+        "Exit".red,
       ],
     })
     .then(({ choice }) => {
@@ -151,8 +144,9 @@ function addRole() {
           validate: (value) => {
             if (isNaN(value) === false) {
               return true;
+            } else {
+              console.log("Please enter a valid salary".red);
             }
-            console.log("Please enter a valid salary".red);
           },
         },
         {
@@ -246,7 +240,7 @@ function addEmp() {
           }
         }
         connection.query(
-          "INSERT INTO employee SET ? ",
+          "INSERT INTO employee SET ?",
           {
             first_name: answer.firstName,
             last_name: answer.lastName,
@@ -270,7 +264,7 @@ function addEmp() {
 // ****************
 
 function update() {
-  connection.query("SELECT * FROM employee, role ", (err, res) => {
+  connection.query("SELECT * FROM employee, role", (err, res) => {
     if (err) throw err;
 
     inquirer
@@ -317,13 +311,14 @@ function update() {
           }
         }
         connection.query(
-          "UPDATE employee SET ? WHERE ? "[
-            ({
+          "UPDATE employee SET ? WHERE ?",
+          [
+            {
               role_id: updRole,
             },
             {
               last_name: updEmp,
-            })
+            },
           ],
           (err) => {
             if (err) throw err;
