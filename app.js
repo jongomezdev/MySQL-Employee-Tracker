@@ -192,7 +192,75 @@ function addRole() {
   });
 }
 
-function addEmp() {}
+function addEmp() {
+  const sql = "SELECT * FROM employee, role";
+  connection.query(sql, (err, res) => {
+    if (err) throw err;
+
+    inquirer
+      .prompt([
+        {
+          name: "firstName",
+          type: "input",
+          message: "Enter a first name:",
+          validate: (value) => {
+            if (value) {
+              return true;
+            } else {
+              console.log("Please enter a first name".red);
+            }
+          },
+        },
+        {
+          name: "lastName",
+          type: "input",
+          message: "Enter a last name:",
+          validate: (value) => {
+            if (value) {
+              return true;
+            } else {
+              console.log("Please enter a last name".red);
+            }
+          },
+        },
+        {
+          name: "role",
+          type: "list",
+          choices: () => {
+            let roles = [];
+            for (let i = 0; i < res.length; i++) {
+              roles.push(res[i].title);
+            }
+          },
+          message: "What is their role?",
+        },
+      ])
+      .then((answer) => {
+        let roleChoice;
+
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].title === answer.role) {
+            roleChoice = res[i];
+          }
+        }
+        connection.query(
+          "INSERT INTO employee SET ? ",
+          {
+            first_name: answer.firstName,
+            last_name: answer.lastName,
+            role_id: roleChoice.id,
+          },
+          (err) => {
+            if (err) throw err;
+            console.log(
+              `${answer.firstName} ${answer.lastName} has been added as a ${answer.role}`
+            );
+            init();
+          }
+        );
+      });
+  });
+}
 
 function update() {}
 
