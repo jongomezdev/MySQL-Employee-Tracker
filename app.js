@@ -26,37 +26,37 @@ function init() {
       type: "list",
       message: "Please select an action:".yellow,
       choices: [
-        "View all departments",
-        "View all roles",
-        "View all employees",
-        "Add a department",
-        "Add a role",
-        "Add an employee",
-        "Update employee roles",
+        "View all departments".blue,
+        "View all roles".blue,
+        "View all employees".blue,
+        "Add a department".green,
+        "Add a role".green,
+        "Add an employee".green,
+        "Update employee roles".magenta,
         "Exit".red,
       ],
     })
     .then(({ choice }) => {
       switch (choice) {
-        case "View all departments":
+        case "View all departments".blue:
           viewDep();
           break;
-        case "View all roles":
+        case "View all roles".blue:
           viewRoles();
           break;
-        case "View all employees":
+        case "View all employees".blue:
           viewEmp();
           break;
-        case "Add a department":
+        case "Add a department".green:
           addDep();
           break;
-        case "Add a role":
+        case "Add a role".green:
           addRole();
           break;
-        case "Add an employee":
+        case "Add an employee".green:
           addEmp();
           break;
-        case "Update employee roles":
+        case "Update employee roles".magenta:
           update();
           break;
         default:

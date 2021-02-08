@@ -4,7 +4,7 @@
 
 ## Description
 
-A command-line application that dynamically generates a professional readme.md file from user input.
+A Content Management System that allows users to access information stored in a workplace database and manage employee's using node, inquirer and MySQL.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ Clone the repo and run `npm install` for the required dependencies
 
 ## Usage
 
-Application will be invoked by using the `node index.js` command in the terminal.
+Application will be invoked by using the `node app.js` command in the terminal. CLI functionality allows the user to add a department, role & employee. You can also edit an existing employee role.
 
 ## License
 
@@ -37,7 +37,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>
 
 ## Contributing
 
-Open source, feel free to modify and change!
+Open source, feel free to modify and change! Please share the results.
 
 ## Questions
 
@@ -51,4 +51,6 @@ Check out my other repositories in the link below:
 
 The following animation demonstrates the application functionality:
 
-![README Generator demo](assets/readmedemo.gif)
+[Live Demo](https://youtu.be/yEP9WSaosts)
+
+![Screenshot](assets/employee-tracker-img.png)
