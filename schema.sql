@@ -47,4 +47,3 @@ VALUES ('Jayden', 'Seward', 2, 1),
 ('Braiden', 'Emmet', 3, NULL),
 ('Chad', 'Forest', 6, 5),
 ('Mackenzie', 'Pit', 5, NULL);
-

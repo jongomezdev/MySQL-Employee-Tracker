@@ -6,7 +6,7 @@ const colors = require("colors");
 const { restoreDefaultPrompts } = require("inquirer");
 
 // Opening Graphic
-// figlet("Employee Tracker", (err, data) => {
+// figlet("Employee \n \n Tracker", (err, data) => {
 //   if (err) throw err;
 //   console.log(data.rainbow);
 // });
@@ -31,7 +31,7 @@ function init() {
     .prompt({
       name: "choice",
       type: "list",
-      message: "Please select an action:",
+      message: "Please select an action:".yellow,
       choices: [
         "View all departments",
         "View all roles",
@@ -106,7 +106,7 @@ function addDep() {
       {
         name: "department",
         type: "input",
-        message: "What would you like to name this department?",
+        message: "What would you like to name this department?".yellow,
       },
     ])
     .then((answer) => {
@@ -135,7 +135,7 @@ function addRole() {
         {
           name: "title",
           type: "input",
-          message: "What is the title for the new role?",
+          message: "What is the title for the new role?".yellow,
           validate: (value) => {
             if (value) {
               return true;
@@ -147,7 +147,7 @@ function addRole() {
         {
           name: "salary",
           type: "input",
-          message: "What is the salary for the new role?",
+          message: "What is the salary for the new role?".yellow,
           validate: (value) => {
             if (isNaN(value) === false) {
               return true;
@@ -160,12 +160,12 @@ function addRole() {
           type: "list",
           choices: () => {
             let roles = [];
-            for (let i = 0; i < restoreDefaultPrompts.length; i++) {
+            for (let i = 0; i < res.length; i++) {
               roles.push(res[i].name);
             }
             return roles;
           },
-          message: "What department is this role under?",
+          message: "What department is this role under?".yellow,
         },
       ])
       .then((answer) => {
@@ -202,7 +202,7 @@ function addEmp() {
         {
           name: "firstName",
           type: "input",
-          message: "Enter a first name:",
+          message: "Enter a first name:".yellow,
           validate: (value) => {
             if (value) {
               return true;
@@ -214,7 +214,7 @@ function addEmp() {
         {
           name: "lastName",
           type: "input",
-          message: "Enter a last name:",
+          message: "Enter a last name:".yellow,
           validate: (value) => {
             if (value) {
               return true;
@@ -231,8 +231,10 @@ function addEmp() {
             for (let i = 0; i < res.length; i++) {
               roles.push(res[i].title);
             }
+            let choiceArr = [...new Set(roles)];
+            return choiceArr;
           },
-          message: "What is their role?",
+          message: "What is their role?".yellow,
         },
       ])
       .then((answer) => {
@@ -254,7 +256,7 @@ function addEmp() {
             if (err) throw err;
             console.log(
               `${answer.firstName} ${answer.lastName} has been added as a ${answer.role}`
-                .yellow
+                .green
             );
             init();
           }
@@ -262,6 +264,10 @@ function addEmp() {
       });
   });
 }
+
+// ****************
+// Update function
+// ****************
 
 function update() {
   connection.query("SELECT * FROM employee, role ", (err, res) => {
@@ -277,8 +283,23 @@ function update() {
             for (let i = 0; i < res.length; i++) {
               roles.push(res[i].title);
             }
+            let choiceArr = [...new Set(roles)];
+            return choiceArr;
           },
-          message: "What new role would you like to assign?",
+          message: "Which employee are you updating?".yellow,
+        },
+        {
+          name: "role",
+          type: "list",
+          choices: () => {
+            let roles = [];
+            for (let i = 0; i < res.length; i++) {
+              roles.push(res[i].title);
+            }
+            let choiceArr = [...new Set(roles)];
+            return choiceArr;
+          },
+          message: "What is the employees new role?".yellow,
         },
       ])
       .then((answer) => {
@@ -313,9 +334,3 @@ function update() {
       });
   });
 }
-
-// Add departments, roles, employees
-
-// View departments, roles, employees
-
-// Update employee roles
