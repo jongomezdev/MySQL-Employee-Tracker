@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const cTable = require("console.table");
 const figlet = require("figlet");
 const colors = require("colors");
+const { restoreDefaultPrompts } = require("inquirer");
 
 // Opening Graphic
 // figlet("Employee Tracker", (err, data) => {
@@ -124,7 +125,72 @@ function addDep() {
     });
 }
 
-function addRole() {}
+function addRole() {
+  const sql = "SELECT * FROM department";
+  connection.query(sql, (err, res) => {
+    if (err) throw err;
+
+    inquirer
+      .prompt([
+        {
+          name: "title",
+          type: "input",
+          message: "What is the title for the new role?",
+          validate: (value) => {
+            if (value) {
+              return true;
+            } else {
+              console.log("Please enter a role title".red);
+            }
+          },
+        },
+        {
+          name: "salary",
+          type: "input",
+          message: "What is the salary for the new role?",
+          validate: (value) => {
+            if (isNaN(value) === false) {
+              return true;
+            }
+            console.log("Please enter a valid salary".red);
+          },
+        },
+        {
+          name: "department",
+          type: "list",
+          choices: () => {
+            let roles = [];
+            for (let i = 0; i < restoreDefaultPrompts.length; i++) {
+              roles.push(res[i].name);
+            }
+            return roles;
+          },
+          message: "What department is this role under?",
+        },
+      ])
+      .then((answer) => {
+        let choice;
+        for (let i = 0; i < res.length; i++) {
+          if (res[i].name === answer.department) {
+            choice = res[i];
+          }
+        }
+        connection.query(
+          "INSERT INTO role SET ?",
+          {
+            title: answer.title,
+            salary: answer.salary,
+            department_id: choice.id,
+          },
+          (err) => {
+            if (err) throw err;
+            console.log(`${answer.title} role has been added!`);
+            init();
+          }
+        );
+      });
+  });
+}
 
 function addEmp() {}
 
