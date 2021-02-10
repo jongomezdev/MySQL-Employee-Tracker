@@ -16,11 +16,11 @@ A Content Management System that allows users to access information stored in a 
 
 ## Installation
 
-Clone the repo and run `npm install` for the required dependencies
+1. Clone the repo and run `npm install` for the required dependencies.
 
 ## Usage
 
-Application will be invoked by using the `node app.js` command in the terminal. CLI functionality allows the user to add a department, role & employee. You can also edit an existing employee role.
+Application will be invoked by using the `node app.js` command in the terminal. CLI functionality allows the user to add a department, role & employee. You can also edit an existing employee role. Be sure to add the schema.sql to your Workbench and start the server using your own password.
 
 ## License
 

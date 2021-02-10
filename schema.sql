@@ -26,21 +26,6 @@ CREATE TABLE employee(
   FOREIGN KEY(manager_id) REFERENCES employee(id)
 );
 
-SELECT name 
-FROM department 
-LEFT JOIN role 
-ON department.id = role.department_id;
-
-SELECT title, salary, department_id 
-FROM role 
-LEFT JOIN department 
-ON role.department_id = department.id;
-
-SELECT first_name, last_name, role_id, manager_id 
-FROM employee 
-JOIN role 
-ON employee.role_id = role.department_id;
-
 INSERT INTO department(name)
 VALUES ('Medical Staff'),
 ('Administrative'),
@@ -62,3 +47,18 @@ VALUES ('Jayden', 'Seward', 2, 1),
 ('Braiden', 'Emmet', 3, NULL),
 ('Chad', 'Forest', 6, 5),
 ('Mackenzie', 'Pit', 5, NULL);
+
+SELECT name 
+FROM department 
+LEFT JOIN role 
+ON department.id = role.department_id;
+
+SELECT title, salary, department_id 
+FROM role 
+LEFT JOIN department 
+ON role.department_id = department.id;
+
+SELECT first_name, last_name, role_id, manager_id 
+FROM employee 
+JOIN role 
+ON employee.role_id = role.department_id;
